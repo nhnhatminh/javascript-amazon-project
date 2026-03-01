@@ -46,7 +46,8 @@ products.forEach((products) => {
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary js-add-to-cart" 
+      <button class="add-to-cart-button button-primary js-add-to-cart"
+      data-product-id="${products.id}" 
       data-product-name="${products.name}"
       data-product-image="${products.image}"
       data-product-price="${products.priceCents}"
@@ -61,12 +62,15 @@ document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
+    const productId = button.dataset.productId;
     const productName = button.dataset.productName;
+    const productImage = button.dataset.productImage;
+    const productPrice = button.dataset.productPrice;
 
     let matchingItem;
 
     cart.forEach((item) => {
-      if(productName === item.productName) {
+      if(productId === item.productId) {
         matchingItem = item;
       }
     })
@@ -82,6 +86,14 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     }
 
     
+    let cartQuantity = 0;
+
+    cart.forEach((item) =>{
+      cartQuantity += item.quantity;
+    });
+
+    document.querySelector('.js-cart-quantity').innerHTML= cartQuantity;
+
     console.log(cart)
 
   });
