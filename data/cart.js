@@ -1,4 +1,4 @@
-export const cart = [
+export let cart = [
   {
     productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     productName: "Black and Gray Athletic Cotton Socks - 6 Pairs",
@@ -30,4 +30,15 @@ export function addToCart(productId, productName) {
       quantity: 1,
     });
   }
+}
+
+export function deleteProductFromCart(productId) {
+  let newCart = [];
+
+  cart.forEach((cartItem) => {
+    if(productId != cartItem.productId) {
+      newCart.push(cartItem);
+    }
+  })
+  cart = newCart
 }
