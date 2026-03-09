@@ -5,7 +5,7 @@ if(!cart) {
     {
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
       productName: "Black and Gray Athletic Cotton Socks - 6 Pairs",
-      quantity: 1,
+      quantity: 2,
       deliveryOptionId: '1',
     },
     {
