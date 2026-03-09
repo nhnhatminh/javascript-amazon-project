@@ -56,7 +56,7 @@ export function deleteProductFromCart(productId) {
   cart = newCart;
 
   saveToLocalStorage();
-
+  
 }
 
 export function updateDeliveryOption(productId, deliveryOptionId) {
