@@ -1,10 +1,10 @@
-import {cart, deleteProductFromCart, updateDeliveryOption} from './cart.js';
-import { products } from './products.js';
-import { formatCurrency } from './utils/money.js';
+import {cart, deleteProductFromCart, updateDeliveryOption} from '../../data/cart.js';
+import { products } from '../../data/products.js';
+import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions } from './utils/deliveryOptions.js';
+import { deliveryOptions } from '../../data/deliveryOptions.js';
 
-function renderOrderSummary() {
+export function renderOrderSummary() {
 
   let checkoutSummaryHTML = ``;
 
@@ -140,6 +140,5 @@ function renderOrderSummary() {
 
 }
 
-renderOrderSummary();
 
 
