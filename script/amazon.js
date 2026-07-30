@@ -1,35 +1,35 @@
-import {products} from '../data/products.js';
-import {cart, addToCart} from '../data/cart.js';
-import {formatCurrency} from './utils/money.js';
+import { products } from '../data/products.js';
+import { cart, addToCart } from '../data/cart.js';
+import { formatCurrency } from './utils/money.js';
 
 let productsHTML = '';
 
-products.forEach((products) => {
+products.forEach((product) => {
   productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
-          src="${products.image}">
+          src="${product.image}">
       </div>
 
       <div class="product-name limit-text-to-2-lines">
-        ${products.name}
+        ${product.name}
       </div>
 
       <div class="product-rating-container">
         <img class="product-rating-stars"
-          src="images/ratings/rating-${products.rating.stars * 10}.png">
+          src="images/ratings/rating-${product.rating.stars * 10}.png">
         <div class="product-rating-count link-primary">
-          ${products.rating.count}
+          ${product.rating.count}
         </div>
       </div>
 
       <div class="product-price">
-        $${formatCurrency(products.priceCents)}
+        $${formatCurrency(product.priceCents)}
       </div>
 
       <div class="product-quantity-container">
-        <select>
+        <select class="js-product-quantity-${product.id}">
           <option selected value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -51,10 +51,10 @@ products.forEach((products) => {
       </div>
 
       <button class="add-to-cart-button button-primary js-add-to-cart"
-      data-product-id="${products.id}" 
-      data-product-name="${products.name}"
-      data-product-image="${products.image}"
-      data-product-price="${products.priceCents}"
+      data-product-id="${product.id}" 
+      data-product-name="${product.name}"
+      data-product-image="${product.image}"
+      data-product-price="${product.priceCents}"
       >
         Add to Cart
       </button>
@@ -64,26 +64,35 @@ products.forEach((products) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
+const quantitySelector = document.querySelector(`.js-product-quantity-${product.id}`);
+const valuee = quantitySelector.value;
+console.log(valuee);
+
 function updateCartQuantity() {
   let cartQuantity = 0;
 
-  cart.forEach((item) =>{
+  cart.forEach((item) => {
     cartQuantity += item.quantity;
   });
 
-  document.querySelector('.js-cart-quantity').innerHTML= cartQuantity;
+  const cartQuantityElement = document.querySelector('.js-cart-quantity');
+  if (cartQuantityElement) {
+    cartQuantityElement.innerHTML = cartQuantity;
+  }
 }
+
+updateCartQuantity();
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
     const productName = button.dataset.productName;
-    const productImage = button.dataset.productImage;
-    const productPrice = button.dataset.productPrice;
 
-    addToCart(productId, productName);
+    const quantitySelector = document.querySelector(`.js-product-quantity-${productId}`);
+
+    const selectedQuantity = Number(quantitySelector.value);
+
+    addToCart(productId, productName, selectedQuantity);
     updateCartQuantity();
-    console.log(cart)
-
   });
 });
