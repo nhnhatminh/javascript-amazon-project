@@ -52,6 +52,29 @@
     </div>
     
     <div class="main">
+      <div class="filter-sort-container">
+        <div class="filter-group">
+          <label for="category-select" class="filter-label">Category:</label>
+          <select id="category-select" class="filter-select js-category-select">
+            <option value="all">All Categories</option>
+            <option value="clothing">Apparel & Clothing</option>
+            <option value="kitchen">Kitchen & Appliances</option>
+            <option value="home">Home & Living</option>
+            <option value="accessories">Accessories & Others</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-select" class="filter-label">Sort by:</label>
+          <select id="sort-select" class="filter-select js-sort-select">
+            <option value="default">Default</option>
+            <option value="price-low-high">Price: Low to High</option>
+            <option value="price-high-low">Price: High to Low</option>
+            <option value="rating-high-low">Highest Rated</option>
+          </select>
+        </div>
+      </div>
+
       <div class="products-grid js-products-grid">
         <!-- <div class="product-container">
           <div class="product-image-container">
