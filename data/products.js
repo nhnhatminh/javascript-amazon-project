@@ -12,18 +12,20 @@ export function getProduct(productId) {
 
 export let products = [];
 
-export async function loadProductFetch() {
+export async function loadProductsFetch() {
   try {
-    const response = await fetch("backend/products.json");
+    const response = await fetch('http://localhost:3000/api/products');
+    const productsData = await response.json();
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
 
-    products = await response.json();
     return products;
   } catch (error) {
-    console.log('Failed to fetch products', error);
-    throw error;
+    console.error('Error loading products from Node.js REST API:', error);
   }
 }
