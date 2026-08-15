@@ -1,4 +1,4 @@
-import { products, loadProductFetch } from '../data/products.js';
+import { products, loadProductsFetch } from '../data/products.js';
 import { cart, addToCart } from '../data/cart.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -168,7 +168,7 @@ async function initPage() {
   }
 
   try {
-    const fetchedProducts = await loadProductFetch();
+    const fetchedProducts = await loadProductsFetch();
 
     renderProductsGrid(fetchedProducts);
     updateCartQuantity();
